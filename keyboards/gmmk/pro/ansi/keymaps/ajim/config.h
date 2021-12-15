@@ -1,2 +1,3 @@
 #define PERMISSIVE_HOLD
 #define RETRO_TAPPING
+#define RGBLIGHT_SLEEP

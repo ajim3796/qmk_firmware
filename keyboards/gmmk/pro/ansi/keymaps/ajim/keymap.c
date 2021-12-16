@@ -4,12 +4,6 @@
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
     // layer 0 [WIN] (default)
-    //  ESC      F1       F2                F3       F4       F5       F6       F7       F8       F9       F10               F11      F12	   Del           Rotary(Mute)
-    //  ~        1        2                 3        4        5        6        7        8        9        0                  -       (=)	   BackSpc           Home
-    //  Tab      Q        W                 E        R        T        Y        U        I        O        P                 [        ]        \                 End
-    //  Caps     A        S                 D        F        G        H        J        K        L        ;                 "                 Enter             PgUp
-    //  Sh_L              Z                 X        C        V        B        N        M        ,        .                 ?                 Sh_R     Up       PgDn
-    //  Ct_L     Win_L    Alt_L(F20)                                   SPACE                               Alt_R(F21)        FN       Ct_R     Left     Down     Right
 
     [0] = LAYOUT(
         KC_ESC,  KC_F1,   KC_F2,            KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,           KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
@@ -69,3 +63,11 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     return true;
 }
 #endif // ENCODER_ENABLE
+
+#ifdef RGB_MATRIX_ENABLE
+void rgb_matrix_indicators_user(void) {
+    if (host_keyboard_led_state().caps_lock) {
+        rgb_matrix_set_color_all(RGB_RED);
+    }
+}
+#endif // RGB_MATRIX_ENABLE

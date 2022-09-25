@@ -78,6 +78,7 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
                 unregister_code(KC_LCTL);
             }
             break;
+    }
 }
 #endif // ENCODER_ENABLE
 

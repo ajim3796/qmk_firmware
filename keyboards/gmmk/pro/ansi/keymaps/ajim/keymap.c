@@ -65,9 +65,17 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             break;
         case 1:
             if (clockwise) {
-                tap_code(LCTL(LSFT(KC_PGUP)));
+                register_code(KC_LCTL);
+                register_code(KC_LSFT);
+                tap_code(KC_PGUP);
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LCTL);
             } else {
-                tap_code(LCTL(LSFT(KC_PGDN)));
+                register_code(KC_LCTL);
+                register_code(KC_LSFT);
+                tap_code(KC_PGDN);
+                unregister_code(KC_LSFT);
+                unregister_code(KC_LCTL);
             }
             break;
 }

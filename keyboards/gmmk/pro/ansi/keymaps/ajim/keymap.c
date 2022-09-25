@@ -54,7 +54,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // clang-format on
 
 #ifdef ENCODER_ENABLE
-void encoder_update_user(uint8_t index, bool clockwise) {
+bool encoder_update_user(uint8_t index, bool clockwise) {
     switch(biton32(layer_state)){
         default:
             if (clockwise) {
@@ -62,7 +62,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
             } else {
                 tap_code(KC_VOLD);
             }
-            break;
+            return true;
         case 1:
             if (clockwise) {
                 register_code(KC_LCTL);
@@ -77,7 +77,7 @@ void encoder_update_user(uint8_t index, bool clockwise) {
                 unregister_code(KC_LSFT);
                 unregister_code(KC_LCTL);
             }
-            break;
+            return true;
     }
 }
 #endif // ENCODER_ENABLE

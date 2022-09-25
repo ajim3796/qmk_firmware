@@ -65,9 +65,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
             break;
         case 1:
             if (clockwise) {
-                tap_code(MEH(KC_PGUP));
+                tap_code(LCTL(LSFT(KC_PGUP)));
             } else {
-                tap_code(MEH(KC_PGDN));
+                tap_code(LCTL(LSFT(KC_PGDN)));
             }
             break;
 }

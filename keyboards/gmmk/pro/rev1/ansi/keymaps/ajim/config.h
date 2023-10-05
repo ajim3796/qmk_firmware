@@ -1,4 +1,4 @@
 #define PERMISSIVE_HOLD
 #define RETRO_TAPPING
-#define RGB_DISABLE_TIMEOUT 180000     // 3 minutes (3 * 60 * 1000ms)
+#define RGB_MATRIX_TIMEOUT 20000     // 20 seconds (20 * 1000ms)
 #define RGB_DISABLE_WHEN_USB_SUSPENDED

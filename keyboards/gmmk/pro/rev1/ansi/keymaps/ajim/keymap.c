@@ -124,32 +124,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 #ifdef ENCODER_ENABLE
 bool encoder_update_user(uint8_t index, bool clockwise) {
-    switch(biton32(layer_state)){
-        default:
-            if (clockwise) {
-                tap_code(KC_VOLU);
-            } else {
-                tap_code(KC_VOLD);
-            }
-            return true;
-        case 1:
-            if (clockwise) {
-                register_code(KC_LCTL);
-                register_code(KC_LSFT);
-                tap_code(KC_PGUP);
-                unregister_code(KC_LSFT);
-                unregister_code(KC_LCTL);
-            } else {
-                register_code(KC_LCTL);
-                register_code(KC_LSFT);
-                tap_code(KC_PGDN);
-                unregister_code(KC_LSFT);
-                unregister_code(KC_LCTL);
-            }
-            return true;
+    if (clockwise) {
+        tap_code(KC_VOLU);
+    } else {
+        tap_code(KC_VOLD);
     }
+    return false;
 }
-#endif // ENCODER_ENABLE
+#endif
 
 #ifdef RGB_MATRIX_ENABLE
 bool rgb_matrix_indicators_user(void) {
@@ -158,4 +140,4 @@ bool rgb_matrix_indicators_user(void) {
     }
     return false;
 }
-#endif // RGB_MATRIX_ENABLE
+#endif

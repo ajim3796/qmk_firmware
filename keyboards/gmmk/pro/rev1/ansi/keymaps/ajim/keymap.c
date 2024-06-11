@@ -69,6 +69,11 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     NULL
 };
 
+enum custom_keycodes {
+   LT_CAPS = SAFE_RANGE
+};
+
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -78,7 +83,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_ESC,  KC_F1,   KC_F2,            KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,           KC_F11,  KC_F12,  KC_DEL,           KC_MUTE,
         KC_GRV,  KC_1,    KC_2,             KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,             KC_MINS, KC_EQL,  KC_BSPC,          KC_HOME,
         KC_TAB,  KC_Q,    KC_W,             KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,             KC_LBRC, KC_RBRC, KC_BSLS,          KC_END,
-        KC_CAPS, KC_A,    KC_S,             KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,          KC_QUOT,          KC_ENT,           KC_PGUP,
+        LT_CAPS, KC_A,    KC_S,             KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,          KC_QUOT,          KC_ENT,           KC_PGUP,
         KC_LSFT,          KC_Z,             KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,           KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
         KC_LCTL, KC_LGUI, LALT_T(JP_MHEN),                             KC_SPC,                             RALT_T(JP_HENK),  MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
@@ -104,7 +109,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, _______,          _______,
         _______, _______, _______,          _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______,          _______,
         _______,          _______,          _______, _______, _______, _______, _______, _______, _______, _______,          _______,          _______, _______, _______,
-        KC_LGUI, KC_LALT, LCTL_T(KC_LNG2),                            _______,                            RCTL_T(KC_LNG1), MO(3),   KC_RGUI, _______, _______, _______
+        KC_LGUI, KC_LALT, LCTL_T(KC_LNG2),                             _______,                            RCTL_T(KC_LNG1),  MO(3),   KC_RGUI, _______, _______, _______
     ),
 
     // layer 3 [MAC_FN]
@@ -116,6 +121,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         XXXXXXX, TO(0),   XXXXXXX, XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,          XXXXXXX,
         XXXXXXX,          XXXXXXX, RGB_HUI,  XXXXXXX,     XXXXXXX, XXXXXXX, NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, RGB_MOD, XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX,                                 XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, RGB_SPD, RGB_RMOD, RGB_SPI
+    ),
+
+    // layer 4 [TENKEY]
+
+    [4] = LAYOUT(
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, _______,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_7,    KC_8,    KC_9,    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_4,    KC_5,    KC_6,    JP_COLN, XXXXXXX,          _______,          XXXXXXX,
+        XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_1,    KC_2,    KC_3,    XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX,                            KC_0,                               XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
 
@@ -138,6 +154,40 @@ bool rgb_matrix_indicators_user(void) {
     if (host_keyboard_led_state().caps_lock) {
         rgb_matrix_set_color_all(RGB_RED);
     }
+    if (layer_state_is(2)) {
+        rgb_matrix_set_color_all(RGB_CYAN);
+    }
+    if (layer_state_is(4)) {
+        rgb_matrix_set_color_all(RGB_SPRINGGREEN);
+    }
     return false;
 }
 #endif
+
+static bool caps_pressed = false;
+static uint16_t caps_pressed_time = 0;
+
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+  switch (keycode) {
+    case LT_CAPS:
+      if (record->event.pressed) {
+        caps_pressed = true;
+        caps_pressed_time = record->event.time;
+
+        layer_on(4);
+      } else {
+        layer_off(4);
+
+        if (caps_pressed && (TIMER_DIFF_16(record->event.time, caps_pressed_time) < TAPPING_TERM)) {
+          register_code(KC_LSFT);
+          register_code(KC_CAPS);
+          unregister_code(KC_CAPS);
+          unregister_code(KC_LSFT);
+        }
+        caps_pressed = false;
+      }
+      return false;
+      break;
+  }
+  return true;
+}

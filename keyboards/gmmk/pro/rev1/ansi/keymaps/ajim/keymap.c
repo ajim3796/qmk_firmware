@@ -111,5 +111,6 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
     [1] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [2] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
     [3] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
+    [4] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) },
 };
 #endif

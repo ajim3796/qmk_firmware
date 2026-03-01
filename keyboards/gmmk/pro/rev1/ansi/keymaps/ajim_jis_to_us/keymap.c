@@ -60,7 +60,7 @@ const key_override_t kor_tild = ko_make_with_layers(MOD_MASK_SHIFT, JP_ZKHK, JP_
 // Caps     英数 -> Caps
 const key_override_t kor_caps = ko_make_with_layers_and_negmods(0, JP_EISU, JP_CAPS, 1, MOD_MASK_SHIFT);
 
-const key_override_t **key_overrides = (const key_override_t *[]){
+const key_override_t *key_overrides[] = {
     &kor_at,
     &kor_circ,
     &kor_ampr,
@@ -81,14 +81,13 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &kor_dquo,
     &kor_grv,
     &kor_tild,
-    &kor_caps,
-    NULL
+    &kor_caps
 };
 
-enum custom_keycodes {
-   LT_CAPS = SAFE_RANGE
-};
-
+// custom keycodes
+#define LT_CAPS LT(4, KC_CAPS)
+#define LA_LNG2 LALT_T(KC_LNG2)  //半角英数
+#define RA_LNG1 RALT_T(KC_LNG1)  //日本語入力
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -121,7 +120,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,             KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,             KC_LBRC, KC_RBRC, KC_BSLS,          KC_END,
         LT_CAPS, KC_A,    KC_S,             KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,          KC_QUOT,          KC_ENT,           KC_PGUP,
         KC_LSFT,          KC_Z,             KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,           KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
-        KC_LCTL, KC_LGUI, LALT_T(JP_MHEN),                             KC_SPC,                             RALT_T(JP_HENK),  MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, KC_LGUI, LA_LNG2,                                     KC_SPC,                             RA_LNG1,          MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
 

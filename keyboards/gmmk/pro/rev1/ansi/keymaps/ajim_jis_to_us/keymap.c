@@ -98,7 +98,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //      Tab      Q        W        E        R        T        Y        U        I        O        P               [        ]        \                 End
 //      Caps     A        S        D        F        G        H        J        K        L        ;               "                 Enter             PgUp
 //      Sh_L              Z        X        C        V        B        N        M        ,        .               ?                 Sh_R     Up       PgDn
-//      Ct_L     Win_L    Alt_L(ImeOff)                       SPACE                               Alt_R(ImeOn)    FN       Ct_R     Left     Down     Right
+//      Ct_L     Win_L    Alt_L(MHEN)                         SPACE                               Alt_R(HENK)     FN       Ct_R     Left     Down     Right
 
 
     // The FN key by default maps to a momentary toggle to layer 1 to provide access to the QK_BOOT key (to put the board into bootloader mode). Without
@@ -128,12 +128,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // layer 1 [WIN_FN]
 
     [1] = LAYOUT(
-        XXXXXXX, KC_BRID, KC_BRIU, KC_CALC, KC_WHOM, RGB_VAD, RGB_VAI, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX,          XXXXXXX,
-        XXXXXXX, RGB_TOG, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, KC_BRID, KC_BRIU, KC_CALC, KC_WHOM, XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
         XXXXXXX, XXXXXXX, TO(2),   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,          XXXXXXX,
-        XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, RGB_MOD, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, RGB_SPD, RGB_RMOD, RGB_SPI
+        XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX,                            XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
 
@@ -151,12 +151,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     // layer 3 [MAC_FN]
 
     [3] = LAYOUT(
-        XXXXXXX, KC_BRID, KC_BRIU, C(KC_UP), C(S(KC_UP)), RGB_VAD, RGB_VAI, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX,          XXXXXXX,
-        XXXXXXX, RGB_TOG, RGB_HUI, RGB_HUD,  RGB_SAI,     RGB_SAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
+        XXXXXXX, KC_BRID, KC_BRIU, C(KC_UP), C(S(KC_UP)), XXXXXXX, XXXXXXX, KC_MPRV, KC_MPLY, KC_MNXT, KC_MUTE, KC_VOLD, KC_VOLU, XXXXXXX,          XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,
         XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, QK_BOOT,          XXXXXXX,
         XXXXXXX, TO(0),   XXXXXXX, XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX,          XXXXXXX,
-        XXXXXXX,          XXXXXXX, RGB_HUI,  XXXXXXX,     XXXXXXX, XXXXXXX, NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, RGB_MOD, XXXXXXX,
-        XXXXXXX, XXXXXXX, XXXXXXX,                                 XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, RGB_SPD, RGB_RMOD, RGB_SPI
+        XXXXXXX,          XXXXXXX, XXXXXXX,  XXXXXXX,     XXXXXXX, XXXXXXX, NK_TOGG, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,          XXXXXXX, XXXXXXX, XXXXXXX,
+        XXXXXXX, XXXXXXX, XXXXXXX,                                 XXXXXXX,                            XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX
     ),
 
     // layer 4 [TENKEY]
@@ -174,31 +174,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 };
 // clang-format on
 
-#ifdef ENCODER_ENABLE
-bool encoder_update_user(uint8_t index, bool clockwise) {
-    if (clockwise) {
-        tap_code(KC_VOLU);
-    } else {
-        tap_code(KC_VOLD);
-    }
-    return false;
-}
+#if defined(ENCODER_MAP_ENABLE)
+const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][NUM_DIRECTIONS] = {
+    [0] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }, // Layer 0: Vol Down / Vol Up
+    [1] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }, // Layer 1: Vol Down / Vol Up
+    [2] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }, // Layer 2: Vol Down / Vol Up
+    [3] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }, // Layer 3: Vol Down / Vol Up
+    [4] = { ENCODER_CCW_CW(KC_VOLD, KC_VOLU) }, // Layer 4: Vol Down / Vol Up
+};
 #endif
 
-#ifdef RGB_MATRIX_ENABLE
-bool rgb_matrix_indicators_user(void) {
-    if (host_keyboard_led_state().caps_lock) {
-        rgb_matrix_set_color_all(RGB_RED);
-    }
-    if (layer_state_is(2)) {
-        rgb_matrix_set_color_all(RGB_CYAN);
-    }
-    if (layer_state_is(4)) {
-        rgb_matrix_set_color_all(RGB_SPRINGGREEN);
-    }
-    return false;
-}
-#endif
 
 static bool caps_pressed = false;
 static uint16_t caps_pressed_time = 0;

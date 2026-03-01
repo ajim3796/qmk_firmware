@@ -86,8 +86,6 @@ const key_override_t *key_overrides[] = {
 
 // custom keycodes
 #define LT_CAPS LT(4, KC_CAPS)
-#define LA_LNG2 LALT_T(KC_LNG2)  //半角英数
-#define RA_LNG1 RALT_T(KC_LNG1)  //日本語入力
 
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -97,7 +95,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 //      Tab      Q        W        E        R        T        Y        U        I        O        P               [        ]        \                 End
 //      Caps     A        S        D        F        G        H        J        K        L        ;               "                 Enter             PgUp
 //      Sh_L              Z        X        C        V        B        N        M        ,        .               ?                 Sh_R     Up       PgDn
-//      Ct_L     Win_L    Alt_L(MHEN)                         SPACE                               Alt_R(HENK)     FN       Ct_R     Left     Down     Right
+//      Ct_L     Win_L    Alt_L(IME ON)                       SPACE                               Alt_R(IME OFF)  FN       Ct_R     Left     Down     Right
 
 
     // The FN key by default maps to a momentary toggle to layer 1 to provide access to the QK_BOOT key (to put the board into bootloader mode). Without
@@ -120,7 +118,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,  KC_Q,    KC_W,             KC_E,    KC_R,    KC_T,    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,             KC_LBRC, KC_RBRC, KC_BSLS,          KC_END,
         LT_CAPS, KC_A,    KC_S,             KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN,          KC_QUOT,          KC_ENT,           KC_PGUP,
         KC_LSFT,          KC_Z,             KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    KC_COMM, KC_DOT,           KC_SLSH,          KC_RSFT, KC_UP,   KC_PGDN,
-        KC_LCTL, KC_LGUI, LA_LNG2,                                     KC_SPC,                             RA_LNG1,          MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, KC_LGUI, LALT_T(KC_LNG2),                             KC_SPC,                             RALT_T(KC_LNG1),  MO(1),   KC_RCTL, KC_LEFT, KC_DOWN, KC_RGHT
     ),
 
 
